@@ -33,7 +33,7 @@
 \title{\textbf{Migrating Scientific Calculator on ATtiny-85 from ATmega-328p}}
 
 \author{
-\IEEEauthorblockN{EE25BTECH11030-Josyula Avaneesh \and EE25BTECH11054-Harsha Soma Vardhan}
+\IEEEauthorblockN{EE25BTECH11030-Josyula G S Avaneesh \and EE25BTECH11054-Harsha Soma Vardhan}
 }
 
 \begin{document}
@@ -208,7 +208,7 @@ Because the calculator utilizes a 1000-scale fixed-point engine and lookup table
 
 \subsection{System-Specific Error Tolerances}
 \begin{itemize}
-    \item \textbf{General Truncation Error:} Division operations are integer-based. Any decimal precision beyond the third decimal place ($0.001$) is truncated, not rounded. Maximum general precision error is $-0.0009$.
+    \item \textbf{General Truncation Error} Division operations are integer-based. Any decimal precision beyond the third decimal place ($0.001$) is truncated, not rounded. Maximum general precision error is $-0.0009$.
     \item \textbf{Forward Trigonometry ($\sin$, $\cos$, $\tan$):} The system uses a 91-point integer lookup table mapped exactly to degrees ($0^\circ$ to $90^\circ$). Inputs are cast to integers before lookup. Therefore, $\sin(45.6^\circ)$ is evaluated as $\sin(45^\circ)$. The maximum angular resolution error is $0.99^\circ$.
     \item \textbf{Inverse Trigonometry ($\arcsin$, $\arccos$, $\arctan$):} Implemented via a 21-point lookup table with linear interpolation. Because the curve of $\arcsin(x)$ steepens dramatically near $x = 1$, the linear interpolation introduces an error margin of approximately $\pm 0.5^\circ$ for values between bounds.
     \item \textbf{Square Root:} Utilizes an integer-based Newton-Raphson approximation algorithm. Convergence is strictly integer-bounded, yielding a maximum floor truncation error of $-0.001$.
@@ -219,7 +219,7 @@ Standard academic implementations of scientific calculators on microcontrollers 
 
 \begin{itemize}
     \item \textbf{Accuracy vs. Processing Cost:} The RK4 method achieves extreme floating-point accuracy, with its local truncation error bounded by $O(h^5)$, where $h$ is the step size. However, calculating four distinct variables ($k_1, k_2, k_3, k_4$) per step requires intense floating-point multiplication. Our ATtiny85 system abandons this continuous accuracy in favor of $O(1)$ constant-time memory lookups, trading $O(h^5)$ precision for a hardcoded worst-case resolution error of $0.99^\circ$.
-    \item \textbf{Root Approximations:}Standard implementations on larger chips like the ATmega328P use the famous ``Quake III'' algorithm to calculate roots. This algorithm uses a specific bit-level ``magic constant'' (\texttt{0x5f3759df}) to rapidly guess the answer, but it fundamentally requires the system to support complex floating-point decimal numbers. Because our ATtiny85 completely removes the heavy floating-point library to save over $1.5\text{KB}$ of Flash memory, we cannot use this trick. Instead, our system uses a simpler, whole-number (integer) guessing method. While this integer method introduces a tiny precision error (truncating by up to $-0.001$), it successfully calculates roots without the massive memory overhead required by standard decimal algorithms.
+    \item \textbf{Root Approximations:} Standard implementations on larger chips like the ATmega328P use the famous ``Quake III'' algorithm to calculate roots. This algorithm uses a specific bit-level ``magic constant'' (\texttt{0x5f3759df}) to rapidly guess the answer, but it fundamentally requires the system to support complex floating-point decimal numbers. Because our ATtiny85 completely removes the heavy floating-point library to save over $1.5\text{KB}$ of Flash memory, we cannot use this trick. Instead, our system uses a simpler, whole-number (integer) guessing method. While this integer method introduces a tiny precision error (truncating by up to $-0.001$), it successfully calculates roots without the massive memory overhead required by standard decimal algorithms.
 \end{itemize}
 
 Ultimately, the algorithms utilized in systems like the ATmega328p provide superior mathematical continuity and precision. However, they demand memory capacities far exceeding the ATtiny85's $6\text{KB}$ limit. The discrete fixed-point tables and bounded integer Newton-Raphson methods deployed in this project represent the necessary compromises required to force advanced scientific evaluation onto heavily constrained 8-bit architecture.
@@ -230,16 +230,16 @@ During the development phase, isolated code snippets were used to verify hardwar
 \subsection{LCD I2C "Blink" Debug Code}
 This code was used to verify I2C communication and LCD addressing ($0\text{x}27$) without the overhead of matrix scanning.\\
 
-The code is present in the $codes$ directory under the name $blink.c$
+The code is present in the $codes/blink/src$ directory under the name $main.c$
 
 \subsection{Matrix Keypad Debug Code}
 This snippet was utilized to confirm that the shift register (74HC595) was correctly pulsing the rows and that the ATtiny85 was successfully reading the columns, outputting the raw grid coordinate to the LCD.\\
 
-The code is present in the $codes$ directory under the name $button\_matrix.c$
+The code is present in the $codes/button\_matrix/src$ directory under the name $main.c$
 
 \section{Final Optimized Firmware}
 The final production code incorporates the fixed-point math engine,the 91-point trigonometric lookup table, the 21-point inverse trigonometric lookup table, the complete Shunting Yard string parsing evaluator, and the dual-mode mapping system containing Modulo and Absolute Value functions.\\
 
-The code is present in the $codes$ directory under the name $main.c$
+The code is present in the $codes/main/src$ directory under the name $main.c$
 
 \end{document}
