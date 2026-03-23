@@ -1,4 +1,4 @@
-## 🌟 Project Overview
+## Project Overview
 Standard scientific calculators rely on 32-bit or 64-bit architectures with dedicated hardware floating-point units (FPUs). This project forces advanced scientific evaluation onto an 8-bit, 8-pin microcontroller. 
 * **Custom Math Engine:** Bypasses the bloated C `<math.h>` library using a 1000-scale 32-bit fixed-point engine.
 * **Order of Operations:** Implements a dynamic Shunting Yard string parsing algorithm.
@@ -6,7 +6,7 @@ Standard scientific calculators rely on 32-bit or 64-bit architectures with dedi
 
 ---
 
-## 💻 Software Setup & Installation (PlatformIO)
+## Software Setup & Installation (PlatformIO)
 
 To compile and upload this code via the terminal, you need **PlatformIO Core (CLI)** and the Micronucleus USB drivers.
 
@@ -46,7 +46,7 @@ Place the `main.c` code file inside the `src/` directory.
 
 ---
 
-## 🚀 Building and Uploading
+## Building and Uploading
 
 ### 1. Compile the Code
 Verify compilation and memory footprint:
@@ -69,7 +69,7 @@ pio run
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 * **Upload Timeout / Device Not Found**
   * *Cause:* Driver missing or device plugged in too early.

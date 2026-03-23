@@ -230,16 +230,27 @@ During the development phase, isolated code snippets were used to verify hardwar
 \subsection{LCD I2C "Blink" Debug Code}
 This code was used to verify I2C communication and LCD addressing ($0\text{x}27$) without the overhead of matrix scanning.\\
 
-The code is present in the $codes/blink/src$ directory under the name $main.c$
+The code is present in the \href{run:https://github.com/Avaneesh-Josyula/Scientific-calculator-on-ATtiny85/tree/main/codes/blink/src}{\texttt{codes/blink/src}} 
+directory under the name \textit{main.c}
 
 \subsection{Matrix Keypad Debug Code}
 This snippet was utilized to confirm that the shift register (74HC595) was correctly pulsing the rows and that the ATtiny85 was successfully reading the columns, outputting the raw grid coordinate to the LCD.\\
 
-The code is present in the $codes/button\_matrix/src$ directory under the name $main.c$
-
+The code is present in the \href{run:https://github.com/Avaneesh-Josyula/Scientific-calculator-on-ATtiny85/tree/main/codes/button_matrix/src}{\texttt{codes/button\_matrix/src}} 
+directory under the name \textit{main.c}
 \section{Final Optimized Firmware}
 The final production code incorporates the fixed-point math engine,the 91-point trigonometric lookup table, the 21-point inverse trigonometric lookup table, the complete Shunting Yard string parsing evaluator, and the dual-mode mapping system containing Modulo and Absolute Value functions.\\
 
-The code is present in the $codes/main/src$ directory under the name $main.c$
+The code is present in the \href{run:https://github.com/Avaneesh-Josyula/Scientific-calculator-on-ATtiny85/tree/main/codes/main/src}{\texttt{codes/main/src}} 
+directory under the name \textit{main.c}
+
+\section{Circuit}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{./pics/circuitpic.jpeg}
+    \caption{Circuit picture}
+    \label{fig:placeholder}
+\end{figure}
 
 \end{document}
