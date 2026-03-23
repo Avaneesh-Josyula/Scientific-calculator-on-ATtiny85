@@ -55,7 +55,7 @@ pio run
 ```
 *Flash usage should be ~97%.*
 
-### 2. Flash the Digispark (The "Plug-In Dance")
+### 2. Flash the Digispark 
 **Do NOT plug the Digispark into your computer yet.**
 
 1. Run the upload command:
